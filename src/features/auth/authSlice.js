@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { handleApiError } from "../../helpers/handleApiError";
-const { REACT_APP_API_BASE_URL } = import.meta.env;
+const { REACT_APP_API_AUTH_URL } = import.meta.env;
 const initialState = {
 	user:null,
 	isLoading: false,
@@ -10,7 +10,7 @@ const initialState = {
 export const postLogin = createAsyncThunk("auth/postLogin",
 	async(payload, {rejectWithValue, signal})=>{
 		try{
-			const response = await axios.post(`${REACT_APP_API_BASE_URL}/login`, payload, {signal})
+			const response = await axios.post(`${REACT_APP_API_AUTH_URL}/login`, payload, {signal})
 			return response.data
 		}catch(error){
 			return rejectWithValue(handleApiError(error))
@@ -20,7 +20,7 @@ export const postLogin = createAsyncThunk("auth/postLogin",
 export const postLoginOut = createAsyncThunk("auth/postLoginOut",
 	async(payload, {rejectWithValue, signal})=>{
 		try{
-			const response = await axios.post(`${REACT_APP_API_BASE_URL}/logout`, payload, {signal})
+			const response = await axios.post(`${REACT_APP_API_AUTH_URL}/logout`, payload, {signal})
 			return response.data
 		}catch(error){
 			return rejectWithValue(handleApiError(error))
@@ -32,7 +32,7 @@ export const authSlice = createSlice({
   name: "auth",
   initialState,
   extraReducers: (builder) => {
-    builder.addCase(postLogin.pending, (state, action) => {
+    builder.addCase(postLogin.pending, (state) => {
       state.isError = false;
       state.isLoading = true;
     });
@@ -42,7 +42,7 @@ export const authSlice = createSlice({
       localStorage.setItem("token", action.payload.data.token);
       state.user = action.payload
     });
-    builder.addCase(postLogin.rejected, (state, action) => {
+    builder.addCase(postLogin.rejected, (state) => {
       state.isError = true;
       state.isLoading = false;
     });

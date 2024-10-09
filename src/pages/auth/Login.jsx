@@ -10,7 +10,7 @@ const Login = ()=>{
         password: ''
     })
     const dispatch = useDispatch()
-    const {user} = useSelector(authUseSelector)
+    const {user, isLoading} = useSelector(authUseSelector)
     const hangleChange = (e)=>{
         const{name, value} = e.target
         setUserInfo((prevData)=>({
@@ -60,7 +60,7 @@ const Login = ()=>{
                         </svg>
                         <input onChange={(e)=>hangleChange(e)} name="password" value={userInfo.password} type="text" className="grow" placeholder="********" />
                         </label>
-                        <button className="btn btn-primary" type="submit">Login</button>
+                        <button className="btn btn-primary" type="submit"> {isLoading && <span className="loading loading-spinner"></span>}Login</button>
                     </form>
                 </div>
             </div>

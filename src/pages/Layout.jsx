@@ -16,6 +16,9 @@ const Layout = () => {
                             <li className="justify-center">
                                 <Link to="/login">Login</Link>
                             </li>
+                            <li className="justify-center">
+                                <Link to="/timesheet">Timesheets</Link>
+                            </li>
                             <div className="dropdown">
                                 <div tabIndex={0} role="button" className="btn py-0 m-1">
                                     <div className="avatar">
