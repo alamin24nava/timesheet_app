@@ -1,7 +1,7 @@
 import { useState } from "react"
 import toast from "react-hot-toast"
 import { useDispatch, useSelector } from "react-redux"
-import { postLogin, loginGetuseSelector } from "../../features/blogs/loginSlice"
+import { postLogin, authUseSelector } from "../../features/auth/authSlice"
 import { Navigate } from 'react-router-dom';
 
 const Login = ()=>{
@@ -10,8 +10,7 @@ const Login = ()=>{
         password: ''
     })
     const dispatch = useDispatch()
-    const {status} = useSelector(loginGetuseSelector)
-    // console.log(status)
+    const {user} = useSelector(authUseSelector)
     const hangleChange = (e)=>{
         const{name, value} = e.target
         setUserInfo((prevData)=>({
@@ -26,7 +25,7 @@ const Login = ()=>{
         }
         dispatch(postLogin({username:userInfo.username, password:userInfo.password}))
     }
-    if(status == "success"){
+    if(user?.status == "success"){
         return <Navigate to="/" />;
     }
     return(

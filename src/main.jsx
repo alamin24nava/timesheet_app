@@ -11,6 +11,7 @@ import { store } from "./app/store";
 import { Provider } from "react-redux";
 import { Toaster } from "react-hot-toast";
 import Login from "./pages/auth/Login";
+import Profile from "./pages/auth/Profile";
 
 createRoot(document.getElementById("root")).render(
   <Provider store={store}>
@@ -22,6 +23,7 @@ createRoot(document.getElementById("root")).render(
             <Route index element={<Home />} />
             <Route path="login" element={<Login />} />
             <Route path="blogs" element={<Blogs />} />
+            <Route path="profile" element={<Profile />} />
             <Route path="*" element={<NoPage />} />
           </Route>
         </Routes>
