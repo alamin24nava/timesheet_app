@@ -26,16 +26,18 @@ export const getUserManagement = createAsyncThunk("user/management",
 );
 
 export const getProductHours = createAsyncThunk("timesheet/getProductHours",
-	async(payload,{rejectWithValue})=>{
+	async(payload,{rejectWithValue, signal})=>{
 		try{
 			const response = await axios.get(`${REACT_APP_API_BASE_URL}/time-sheet/get-product-hours`,{
                 headers: {
                     "x-Authorization": localStorage.getItem("token")
                   },
+                  signal:signal
             })
             console.log(response)
 			return response.data
 		}catch(error){
+            console.log("nooooo")
 			return rejectWithValue(handleApiError(error))
 		}
 	}

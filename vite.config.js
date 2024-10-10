@@ -17,6 +17,9 @@ export default defineConfig(() => {
     return {
         server: {
             port: 9000,
+            hmr: {
+                overlay: false, // Disables the error overlay
+              },
         },
         build: {
             outDir: "build",
